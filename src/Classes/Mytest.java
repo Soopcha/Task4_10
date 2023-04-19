@@ -3,27 +3,26 @@ package Classes;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Mytest {
 
-
     public static void main(String[] args) {
-        String text = "Пример текста, который мы будем использовать.";
+        String text = "это текст из нескольких слов, с точками и запятыми; и еще со скобками (вот так)";
 
-        // Удаляем пробелы и другие знаки из текста
-        String cleanedText = text.replaceAll("[^a-zA-Zа-яА-Я]", "");
+        String[] words = text.split("[\\s\\p{Punct}]+"); // разделяем текст по пробелам и знакам препинания
+        List<String> pairs = new ArrayList<String>();
 
-        // Создаем список пар символов
-        List<String> pairs = new ArrayList<>();
-        for (int i = 0; i < cleanedText.length() - 1; i++) {
-            String pair = "" + cleanedText.charAt(i) + cleanedText.charAt(i + 1);
-            pairs.add(pair);
+        for (String word : words) {
+            for (int i = 0; i < word.length() - 1; i++) {
+                String pair = word.substring(i, i + 2);
+                if (!pair.contains(" ")) {
+                    pairs.add(pair);
+                }
+            }
         }
 
-        // Выводим список пар символов на экран
-        for (String pair : pairs) {
-            System.out.println(pair);
-        }
+        System.out.println(pairs);
     }
-
-
 }
+
+
